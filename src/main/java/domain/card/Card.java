@@ -11,6 +11,14 @@ public class Card {
 		this.suit = suit;
 	}
 
+	public boolean isAce() {
+		return rank == Rank.ACE;
+	}
+
+	public int getScore() {
+		return rank.getValue();
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o)

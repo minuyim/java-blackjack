@@ -11,4 +11,10 @@ public class CardTest {
 	void constructor() {
 		assertThat(new Card(Rank.ACE, Suit.SPADE)).isNotNull();
 	}
+
+	@Test
+	@DisplayName("Ace인지 확인")
+	void isAce() {
+		assertThat(new Card(Rank.ACE, Suit.SPADE).isAce()).isTrue();
+	}
 }

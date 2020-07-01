@@ -22,4 +22,8 @@ public enum Rank {
 		this.value = value;
 		this.pattern = pattern;
 	}
+
+	public int getValue() {
+		return value;
+	}
 }
