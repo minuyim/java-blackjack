@@ -19,17 +19,16 @@ public class GamerTest {
 	@Test
 	@DisplayName("생성 테스트")
 	void constructor() {
-		List<Card> cards = Arrays.asList(new Card(Rank.ACE, Suit.SPADE), new Card(Rank.EIGHT, Suit.SPADE));
-		assertThat(Gamer.of("사람", new Hand(cards), 10_000)).isNotNull();
+		assertThat(Gamer.of("사람", new TestDeckFactory().create(), 10_000)).isNotNull();
 	}
 
 	@Test
-	@DisplayName("게이머가 히트할 수 있는지 확인")
+	@DisplayName("게이머가 hit할 수 있는지 확인")
 	void hit() {
 		List<Card> cards = new ArrayList<>(Arrays.asList(new Card(Rank.ACE, Suit.SPADE), new Card(Rank.EIGHT, Suit.SPADE)));
-		Gamer gamer = Gamer.of("사람", new Hand(cards), 10_000);
 		DeckFactory testDeckFactory = new TestDeckFactory();
+		Gamer gamer = Gamer.of("사람", testDeckFactory.create(), 10_000);
 		gamer.hit(testDeckFactory.create());
-		assertThat(gamer.getHand().getCards()).hasSize(3);
+		assertThat(gamer.getState().getCards()).hasSize(3);
 	}
 }

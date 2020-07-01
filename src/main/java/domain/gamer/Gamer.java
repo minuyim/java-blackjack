@@ -1,32 +1,34 @@
 package domain.gamer;
 
 import domain.card.deck.Deck;
+import domain.state.State;
+import domain.state.StateFactory;
 
 public class Gamer {
 	private final Name name;
-	private final Hand hand;
+	private State state;
 	private final BattingMoney battingMoney;
 
-	private Gamer(Name name, Hand hand, BattingMoney battingMoney) {
+	private Gamer(Name name, State state, BattingMoney battingMoney) {
 		this.name = name;
-		this.hand = hand;
+		this.state = state;
 		this.battingMoney = battingMoney;
 	}
 
-	public static Gamer of(String name, Hand hand, int battingMoney) {
-		return new Gamer(new Name(name), hand, new BattingMoney(battingMoney));
+	public static Gamer of(String name, Deck deck, int battingMoney) {
+		return new Gamer(new Name(name), StateFactory.create(deck), new BattingMoney(battingMoney));
 	}
 
 	public void hit(Deck deck) {
-		hand.add(deck.pop());
+		state = state.hit(deck);
 	}
 
 	public Name getName() {
 		return name;
 	}
 
-	public Hand getHand() {
-		return hand;
+	public State getState() {
+		return state;
 	}
 
 	public BattingMoney getBattingMoney() {
