@@ -2,6 +2,7 @@ package domain.gamer;
 
 import static org.assertj.core.api.Assertions.*;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import org.junit.jupiter.api.DisplayName;
@@ -22,7 +23,7 @@ public class HandTest {
 	@Test
 	@DisplayName("카드를 더할 수 있는 지 확인")
 	void addCard() {
-		Hand hand = new Hand(Arrays.asList(new Card(Rank.EIGHT, Suit.SPADE), new Card(Rank.EIGHT, Suit.CLUB)));
+		Hand hand = new Hand(new ArrayList<>(Arrays.asList(new Card(Rank.EIGHT, Suit.SPADE), new Card(Rank.EIGHT, Suit.CLUB))));
 		hand.add(new Card(Rank.ACE, Suit.SPADE));
 		assertThat(hand.getCards()).hasSize(3);
 	}
