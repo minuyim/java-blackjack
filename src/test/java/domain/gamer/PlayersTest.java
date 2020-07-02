@@ -16,17 +16,25 @@ import domain.card.deck.AbstractDeckFactory;
 import domain.card.deck.Deck;
 import domain.card.deck.TestDeckFactory;
 
-public class DealerTest {
+public class PlayersTest {
 	@Test
 	@DisplayName("생성 테스트")
 	void constructor() {
-		Deck deck = new TestDeckFactory().create();
-		assertThat(Dealer.of(deck)).isNotNull();
+		assertThat(new Players(
+			Collections.singletonList(Player.of("사람", new TestDeckFactory().create(), 10_000)))).isNotNull();
+	}
+
+	@Test
+	@DisplayName("생성 테스트 - 리스트가 비어있는 경우 예외 처리")
+	void constructorException() {
+		assertThatThrownBy(() -> new Players(Collections.emptyList()))
+			.isInstanceOf(IllegalArgumentException.class)
+			.hasMessageContaining("비어");
 	}
 
 	@Test
 	@DisplayName("플레이어들의 총 수익을 계산")
-	void calculateEarning() {
+	void calculateTotalEarning() {
 		Deck deck = new AbstractDeckFactory() {
 			@Override
 			public List<Card> handleCards(List<Card> cards) {
@@ -40,6 +48,6 @@ public class DealerTest {
 			Collections.singletonList(player));
 		Dealer dealer = Dealer.of(deck);
 
-		assertThat(dealer.calculateEarning(players)).isEqualTo(10_000);
+		assertThat(players.calculateTotalEarning(dealer)).isEqualTo(-10_000);
 	}
 }

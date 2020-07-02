@@ -19,4 +19,8 @@ public class Dealer extends Gamer {
 	public boolean canHit() {
 		return !state.isFinished() && state.calculateScore() < HIT_THRESHOLD;
 	}
+
+	public int calculateEarning(Players players) {
+		return -1 * players.calculateTotalEarning(this);
+	}
 }
