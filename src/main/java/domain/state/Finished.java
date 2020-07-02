@@ -22,8 +22,4 @@ public abstract class Finished extends GamerState {
 	public boolean isFinished() {
 		return true;
 	}
-
-	public int calculateScore() {
-		return hand.calculateScore();
-	}
 }

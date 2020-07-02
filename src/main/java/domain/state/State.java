@@ -10,6 +10,8 @@ public interface State {
 
 	State stay();
 
+	int calculateScore();
+
 	boolean isFinished();
 
 	boolean isWin(State state);

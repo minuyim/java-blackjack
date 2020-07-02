@@ -17,4 +17,9 @@ public abstract class GamerState implements State {
 	public List<Card> getCards() {
 		return Collections.unmodifiableList(hand.getCards());
 	}
+
+	public int calculateScore() {
+		return hand.calculateScore();
+	}
+
 }

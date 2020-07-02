@@ -31,4 +31,6 @@ public abstract class Gamer {
 	public State getState() {
 		return state;
 	}
+
+	public abstract boolean canHit();
 }

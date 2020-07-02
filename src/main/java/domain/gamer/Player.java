@@ -25,4 +25,9 @@ public class Player extends Gamer {
 		}
 		return -1 * battingMoney.getMoney();
 	}
+
+	@Override
+	public boolean canHit() {
+		return !state.isFinished();
+	}
 }
