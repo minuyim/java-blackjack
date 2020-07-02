@@ -23,6 +23,7 @@ public abstract class Gamer {
 	public boolean isFinished() {
 		return state.isFinished();
 	}
+
 	public Name getName() {
 		return name;
 	}

@@ -13,4 +13,8 @@ public class BattingMoney {
 			throw new IllegalArgumentException("음수는 허용되지 않습니다. input : " + money);
 		}
 	}
+
+	public int getMoney() {
+		return money;
+	}
 }
