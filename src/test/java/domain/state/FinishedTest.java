@@ -25,7 +25,7 @@ public class FinishedTest {
 	@Test
 	@DisplayName("hit 요청 시 예외 처리")
 	void hit() {
-		assertThatThrownBy(() -> new BlackJack(
+		assertThatThrownBy(() -> new Stay(
 			new Hand(Arrays.asList(new Card(Rank.EIGHT, Suit.SPADE),
 				new Card(Rank.NINE, Suit.CLUB)))).hit(new TestDeckFactory().create()))
 			.isInstanceOf(UnsupportedOperationException.class);
@@ -34,9 +34,16 @@ public class FinishedTest {
 	@Test
 	@DisplayName("stay 요청 시 예외 처리")
 	void stay() {
-		assertThatThrownBy(() -> new BlackJack(
+		assertThatThrownBy(() -> new Stay(
 			new Hand(Arrays.asList(new Card(Rank.EIGHT, Suit.SPADE),
 				new Card(Rank.NINE, Suit.CLUB)))).stay())
 			.isInstanceOf(UnsupportedOperationException.class);
+	}
+
+	@Test
+	void calculateScore() {
+		assertThat(new Stay(
+			new Hand(Arrays.asList(new Card(Rank.EIGHT, Suit.SPADE),
+				new Card(Rank.NINE, Suit.CLUB)))).calculateScore()).isEqualTo(17);
 	}
 }

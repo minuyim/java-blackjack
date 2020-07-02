@@ -10,6 +10,19 @@ public class Stay extends Finished {
 	}
 
 	@Override
+	public boolean isWin(State state) {
+		if (state instanceof Stay) {
+			return calculateScore() > ((Stay)state).calculateScore();
+		}
+		return !state.isWin(this);
+	}
+
+	@Override
+	public boolean isSameResult(State state) {
+		return state instanceof Stay && calculateScore() == ((Stay)state).calculateScore();
+	}
+
+	@Override
 	public double getEarningRate() {
 		return NORMAL_RATE;
 	}

@@ -15,4 +15,14 @@ public class Player extends Gamer {
 	public static Player of(String name, Deck deck, int battingMoney) {
 		return new Player(new Name(name), StateFactory.create(deck), new BattingMoney(battingMoney));
 	}
+
+	public int calculateEarning(Dealer dealer) {
+		if (state.isSameResult(dealer.state)) {
+			return 0;
+		}
+		if (state.isWin(dealer.state)) {
+			return (int)(battingMoney.getMoney() * state.getEarningRate());
+		}
+		return -1 * battingMoney.getMoney();
+	}
 }

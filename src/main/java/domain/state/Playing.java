@@ -28,8 +28,17 @@ public class Playing extends GamerState {
 	}
 
 	@Override
-	public double getEarningRate() {
+	public boolean isWin(State state) {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
+	public boolean isSameResult(State state) {
+		 throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public double getEarningRate() {
+		throw new UnsupportedOperationException();
+	}
 }

@@ -52,4 +52,25 @@ public class PlayingTest {
 				new Card(Rank.NINE, Suit.CLUB))))).getEarningRate())
 			.isInstanceOf(UnsupportedOperationException.class);
 	}
+
+	@Test
+	@DisplayName("isSameResult 요청 시 예외 발생")
+	void isSameResult() {
+		assertThatThrownBy(() -> new Playing(
+			new Hand(new ArrayList<>(Arrays.asList(new Card(Rank.EIGHT, Suit.SPADE),
+				new Card(Rank.NINE, Suit.CLUB))))).isSameResult(
+			new Stay(new Hand(new ArrayList<>(Arrays.asList(new Card(Rank.EIGHT, Suit.SPADE),
+				new Card(Rank.NINE, Suit.CLUB)))))))
+			.isInstanceOf(UnsupportedOperationException.class);
+	}
+	@Test
+	@DisplayName("isSameResult 요청 시 예외 발생")
+	void isWin() {
+		assertThatThrownBy(() -> new Playing(
+			new Hand(new ArrayList<>(Arrays.asList(new Card(Rank.EIGHT, Suit.SPADE),
+				new Card(Rank.NINE, Suit.CLUB))))).isWin(
+			new Stay(new Hand(new ArrayList<>(Arrays.asList(new Card(Rank.EIGHT, Suit.SPADE),
+				new Card(Rank.NINE, Suit.CLUB)))))))
+			.isInstanceOf(UnsupportedOperationException.class);
+	}
 }

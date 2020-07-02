@@ -12,6 +12,10 @@ public interface State {
 
 	boolean isFinished();
 
+	boolean isWin(State state);
+
+	boolean isSameResult(State state);
+
 	double getEarningRate();
 
 	List<Card> getCards();
