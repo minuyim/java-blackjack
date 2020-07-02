@@ -27,30 +27,49 @@ public class BlackJackController {
 	}
 
 	public void run() {
-		List<PlayerInfo> playerInfos = inputView.inputPlayerInfos();
-		DeckFactory randomShuffledDeckFactory = new RandomShuffledDeckFactory();
-		Deck deck = randomShuffledDeckFactory.create();
-
-		Players players = playerInfos.stream()
-			.map(playerInfo -> Player.of(playerInfo.getName(), deck, playerInfo.getBattingMoney()))
-			.collect(collectingAndThen(toList(), Players::new));
+		Deck deck = getDeck();
+		Players players = getPlayers(deck);
 		Dealer dealer = Dealer.of(deck);
+		playBlackJack(deck, players, dealer);
+		printResult(players, dealer);
+	}
 
+	private void playBlackJack(Deck deck, Players players, Dealer dealer) {
 		outputView.printGamersCards(GamerDto.listOf(dealer, players.getPlayers()));
-
 		for (Player player : players.getPlayers()) {
-			while (player.canHit()) {
-				YesOrNo yesOrNo = YesOrNo.findByShortName(inputView.inputYesOrNo(player.getName()));
-				yesOrNo.execute(player, deck);
-				outputView.printGamerCards(GamerDto.of(player));
-			}
+			decideHitOrStay(deck, player);
 		}
+		decideDealerHit(deck, dealer);
+	}
 
+	private void decideDealerHit(Deck deck, Dealer dealer) {
 		while (dealer.canHit()) {
 			outputView.printDealerHit();
 			dealer.hit(deck);
 		}
+	}
 
+	private void decideHitOrStay(Deck deck, Player player) {
+		while (player.canHit()) {
+			YesOrNo yesOrNo = YesOrNo.findByShortName(inputView.inputYesOrNo(player.getName()));
+			yesOrNo.execute(player, deck);
+			outputView.printGamerCards(GamerDto.of(player));
+		}
+	}
+
+	private Players getPlayers(Deck deck) {
+		List<PlayerInfo> playerInfos = inputView.inputPlayerInfos();
+		return playerInfos.stream()
+			.map(playerInfo -> Player.of(playerInfo.getName(), deck, playerInfo.getBattingMoney()))
+			.collect(collectingAndThen(toList(), Players::new));
+	}
+
+	private Deck getDeck() {
+		DeckFactory randomShuffledDeckFactory = new RandomShuffledDeckFactory();
+		return randomShuffledDeckFactory.create();
+	}
+
+	private void printResult(Players players, Dealer dealer) {
 		outputView.printGamersCardsWithScore(GamerWithScoreDto.listOf(dealer, players.getPlayers()));
 		outputView.printEarning(GamerEarningDto.listOf(dealer, players));
 	}
