@@ -19,6 +19,14 @@ public class Card {
 		return rank.getValue();
 	}
 
+	public String getRank() {
+		return rank.getPattern();
+	}
+
+	public String getSuit() {
+		return suit.getPattern();
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o)

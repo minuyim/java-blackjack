@@ -1,5 +1,8 @@
 package domain.gamer;
 
+import java.util.List;
+
+import domain.card.Card;
 import domain.card.deck.Deck;
 import domain.state.State;
 import domain.state.StateFactory;
@@ -22,5 +25,9 @@ public class Dealer extends Gamer {
 
 	public int calculateEarning(Players players) {
 		return -1 * players.calculateTotalEarning(this);
+	}
+
+	public List<Card> getOneCards() {
+		return getState().getCards().subList(0, 1);
 	}
 }

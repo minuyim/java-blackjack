@@ -12,7 +12,7 @@ public class Playing extends GamerState {
 	public State hit(Deck deck) {
 		hand.add(deck.pop());
 		if (hand.isBust()) {
-			new Bust(hand);
+			return new Bust(hand);
 		}
 		return new Playing(hand);
 	}

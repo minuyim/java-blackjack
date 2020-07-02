@@ -1,5 +1,8 @@
 package domain.gamer;
 
+import java.util.List;
+
+import domain.card.Card;
 import domain.card.deck.Deck;
 import domain.state.State;
 
@@ -24,12 +27,20 @@ public abstract class Gamer {
 		return state.isFinished();
 	}
 
-	public Name getName() {
-		return name;
+	public int calculateScore() {
+		return state.calculateScore();
+	}
+
+	public String getName() {
+		return name.getName();
 	}
 
 	public State getState() {
 		return state;
+	}
+
+	public List<Card> getCards() {
+		return state.getCards();
 	}
 
 	public abstract boolean canHit();

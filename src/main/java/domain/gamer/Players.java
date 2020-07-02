@@ -1,5 +1,6 @@
 package domain.gamer;
 
+import java.util.Collections;
 import java.util.List;
 
 public class Players {
@@ -20,5 +21,9 @@ public class Players {
 		return players.stream()
 			.mapToInt(player -> player.calculateEarning(dealer))
 			.sum();
+	}
+
+	public List<Player> getPlayers() {
+		return Collections.unmodifiableList(players);
 	}
 }
